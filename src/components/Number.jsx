@@ -1,4 +1,6 @@
 import React from 'react'
+// import * as React from 'react'
+import TextField from '@mui/material/TextField'
 
 function Number({ passwordLength, setPasswordLength }) {
   const onChangeNumber = (e) => {
@@ -6,12 +8,13 @@ function Number({ passwordLength, setPasswordLength }) {
   }
   return (
     <div>
-      <label htmlFor="number">Enter length</label>
-      <input
-        value={passwordLength}
+      <TextField
+        min={0}
         onChange={onChangeNumber}
+        value={passwordLength}
         id="number"
-        type="number"
+        label="Enter length"
+        variant="standard"
       />
     </div>
   )

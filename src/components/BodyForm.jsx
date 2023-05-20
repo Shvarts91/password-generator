@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import Checkbox from './Checkbox'
 import Number from './Number'
 
+import ButtonGenerate from './ButtonGenerate'
+import ButtonCopy from './ButtonCopy'
+
 function BodyForm() {
   const [passwordLength, setPasswordLength] = useState(0)
   const [checkboxLetters, setCheckboxLetters] = useState(false)
   const [checkboxNumbers, setCheckboxNumbers] = useState(false)
   const [checkboxSymbols, setcheckboxSymbols] = useState(false)
   const [password, setPassword] = useState('')
+  const [copySuccess, setCopySuccess] = useState('')
 
   const getPassword = (e) => {
     e.preventDefault()
@@ -24,11 +28,14 @@ function BodyForm() {
     let resultPassword = ''
     for (let i = 1; i <= +passwordLength; i++) {
       var randomNumber = Math.floor(Math.random() * symbolsForPassword.length)
-      // setPassword(symbolsForPassword.substring(randomNumber, randomNumber + 1))
 
       resultPassword += symbolsForPassword[randomNumber]
     }
     setPassword(resultPassword)
+  }
+
+  function copyToClipboard() {
+    setCopySuccess('')
   }
 
   return (
@@ -39,28 +46,55 @@ function BodyForm() {
           passwordLength={passwordLength}
           setPasswordLength={setPasswordLength}
         />
-        <Checkbox
-          valueBox={checkboxLetters}
-          nameBox={'Letters'}
-          setValue={setCheckboxLetters}
+        <div className="blockCheckbox">
+          <div>
+            <div className="checkBox">
+              <Checkbox
+                valueBox={checkboxLetters}
+                nameBox={'Letters'}
+                setValue={setCheckboxLetters}
+              />
+            </div>
+            <div className="checkBox">
+              <Checkbox
+                valueBox={checkboxNumbers}
+                nameBox={'Numbers'}
+                setValue={setCheckboxNumbers}
+              />
+            </div>
+            <div>
+              <Checkbox
+                valueBox={checkboxSymbols}
+                nameBox={'Symbols'}
+                setValue={setcheckboxSymbols}
+              />
+            </div>
+          </div>
+        </div>
+
+        <ButtonGenerate
+          passwordLength={passwordLength}
+          checkboxLetters={checkboxLetters}
+          checkboxNumbers={checkboxNumbers}
+          checkboxSymbols={checkboxSymbols}
         />
-        <Checkbox
-          valueBox={checkboxNumbers}
-          nameBox={'Numbers'}
-          setValue={setCheckboxNumbers}
-        />
-        <Checkbox
-          valueBox={checkboxSymbols}
-          nameBox={'Symbols'}
-          setValue={setcheckboxSymbols}
-        />
-        <button disabled={passwordLength === 0 || !passwordLength}>
-          Generate
-        </button>
       </form>
       <div>
         <h3>Your password:</h3>
-        {password ? password : ''}
+        <div className="blockForPassword">
+          {password ? password : ''}
+          {password ? (
+            <ButtonCopy
+              copyToClipboard={copyToClipboard}
+              setCopySuccess={setCopySuccess}
+              password={password}
+            />
+          ) : (
+            ''
+          )}
+        </div>
+
+        {copySuccess}
       </div>
     </div>
   )

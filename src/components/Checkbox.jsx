@@ -1,19 +1,26 @@
 import React from 'react'
+import Checkbox from '@mui/material/Checkbox'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
 
-function Checkbox({ valueBox, nameBox, setValue }) {
+function CheckboxComponents({ valueBox, nameBox, setValue }) {
   return (
     <div>
-      <label htmlFor="checkbox">{`Use ${nameBox}`}</label>
-      <input
-        onChange={() => {
-          valueBox === false ? setValue(true) : setValue(false)
-        }}
-        value={valueBox}
-        id="checkbox"
-        type="checkbox"
-      />
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              onChange={() => {
+                valueBox === false ? setValue(true) : setValue(false)
+              }}
+              value={valueBox}
+            />
+          }
+          label={`Use ${nameBox}`}
+        />
+      </FormGroup>
     </div>
   )
 }
 
-export default Checkbox
+export default CheckboxComponents
