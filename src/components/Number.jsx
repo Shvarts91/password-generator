@@ -1,5 +1,3 @@
-import React from 'react'
-// import * as React from 'react'
 import TextField from '@mui/material/TextField'
 
 function Number({ passwordLength, setPasswordLength }) {

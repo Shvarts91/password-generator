@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Checkbox from './Checkbox'
 import Number from './Number'
 
@@ -82,7 +82,7 @@ function BodyForm() {
       <div>
         <h3>Your password:</h3>
         <div className="blockForPassword">
-          {password ? password : ''}
+          {!!password.length && password}
           {password ? (
             <ButtonCopy
               copyToClipboard={copyToClipboard}
