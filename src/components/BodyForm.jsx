@@ -11,7 +11,6 @@ function BodyForm() {
   const [checkboxNumbers, setCheckboxNumbers] = useState(false)
   const [checkboxSymbols, setcheckboxSymbols] = useState(false)
   const [password, setPassword] = useState('')
-  const [copySuccess, setCopySuccess] = useState('')
 
   const getPassword = (e) => {
     e.preventDefault()
@@ -32,10 +31,6 @@ function BodyForm() {
       resultPassword += symbolsForPassword[randomNumber]
     }
     setPassword(resultPassword)
-  }
-
-  function copyToClipboard() {
-    setCopySuccess('')
   }
 
   return (
@@ -83,18 +78,8 @@ function BodyForm() {
         <h3>Your password:</h3>
         <div className="blockForPassword">
           {!!password.length && password}
-          {password ? (
-            <ButtonCopy
-              copyToClipboard={copyToClipboard}
-              setCopySuccess={setCopySuccess}
-              password={password}
-            />
-          ) : (
-            ''
-          )}
+          {password ? <ButtonCopy password={password} /> : ''}
         </div>
-
-        {copySuccess}
       </div>
     </div>
   )

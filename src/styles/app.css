@@ -33,6 +33,9 @@ button {
   justify-content: center;
   gap: 15px;
 }
+.textCopied {
+  position: absolute;
+}
 .blockCheckbox {
   display: flex;
   flex-direction: column;

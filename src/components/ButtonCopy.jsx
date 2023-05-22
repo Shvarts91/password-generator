@@ -1,6 +1,13 @@
 import Button from '@mui/material/Button'
+import { useState } from 'react'
 
-function ButtonCopy({ setCopySuccess, copyToClipboard, password }) {
+function ButtonCopy({ password }) {
+  const [copySuccess, setCopySuccess] = useState('')
+
+  function copyToClipboard() {
+    setCopySuccess('')
+  }
+
   const onClickHandle = () => {
     navigator.clipboard.writeText(password)
     setCopySuccess('Copied!')
@@ -11,6 +18,7 @@ function ButtonCopy({ setCopySuccess, copyToClipboard, password }) {
       <Button onClick={onClickHandle} type="button" variant="outlined">
         Copy
       </Button>
+      <div className="textCopied">{copySuccess}</div>
     </div>
   )
 }
